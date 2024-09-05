@@ -30,6 +30,15 @@ app.get('/api/persons', (request, response) => {
     response.json(persons)
 })
 
+app.get('/info', (request, response) => {
+    const date = new Date();
+
+    const infoPage = `<div>Phonebook has info for ${persons.length} people</div>
+        <br/>
+        <div>${date.toString()}</div>`;
+
+    response.send(infoPage);
+})
 
 
 
