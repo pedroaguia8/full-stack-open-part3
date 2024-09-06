@@ -21,7 +21,7 @@ morgan.token('postData', (req, res) => {
     }
     // returns empty character because without it Morgan
     // prints a dash '-' at the end if it's not POST
-    return "‎ ";
+    return "‎";
 })
 
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :postData'));
