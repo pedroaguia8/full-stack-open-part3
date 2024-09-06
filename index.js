@@ -1,10 +1,29 @@
 const express = require('express');
-const morgan = require('morgan');
 
 const app = express();
 
 app.use(express.json());
-app.use(morgan('tiny'));
+
+
+
+
+// Morgan middleware
+const morgan = require('morgan');
+
+morgan.token('postData', (req, res) => {
+    if (req.method === "POST") {
+        const { id, ...dataWithoutId } = req.body;
+        console.log(req.body);
+
+        console.log(dataWithoutId);
+
+        return JSON.stringify(dataWithoutId);
+    }
+})
+
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms :postData'));
+
+
 
 
 
