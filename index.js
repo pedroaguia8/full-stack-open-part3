@@ -1,5 +1,13 @@
 const express = require('express');
+const morgan = require('morgan');
+
 const app = express();
+
+app.use(express.json());
+app.use(morgan('tiny'));
+
+
+
 
 let persons = [
     {
@@ -24,7 +32,7 @@ let persons = [
     }
 ];
 
-app.use(express.json());
+
 
 app.get('/api/persons', (request, response) => {
     response.json(persons)
@@ -79,7 +87,6 @@ app.post('/api/persons', (request, response) => {
 
     response.json(person);
 })
-
 
 
 const PORT = 3001
