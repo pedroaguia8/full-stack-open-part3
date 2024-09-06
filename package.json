@@ -6,7 +6,11 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "test": "echo \\\\\\\"Error: no test specified\\\\\\\" && exit 1"
+    "test": "echo \\\\\\\"Error: no test specified\\\\\\\" && exit 1",
+    "build:ui": "@powershell Remove-Item -Recurse -Force dist && cd ../full-stack-open/part2/phonebook && npm run build && @powershell Copy-Item dist -Recurse ../../../full-stack-open-part3",
+    "deploy": "fly deploy",
+    "deploy:full": "npm run build:ui && npm run deploy",
+    "logs:prod": "fly logs"
   },
   "repository": {
     "type": "git",
@@ -25,6 +29,7 @@
     "phonebook": "file:"
   },
   "devDependencies": {
+    "@flydotio/dockerfile": "^0.5.8",
     "nodemon": "^3.1.4"
   }
 }
