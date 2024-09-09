@@ -111,6 +111,30 @@ app.post('/api/persons', (request, response) => {
         .catch(error => next(error));
 })
 
+app.put('/api/persons/:id', (request, response) => {
+    const body = request.body;
+
+    if (body.name === undefined) {
+        return response.status(400).json({ error: 'name missing' })
+    }
+    if (body.number === undefined) {
+        return response.status(400).json({ error: 'number missing' })
+    }
+
+    const person = {
+        name: body.name,
+        number: body.number,
+    };
+
+    // the optional { new: true } parameter will cause our event handler
+    // to be called with the new modified document instead of the original
+    Person.findByIdAndUpdate(request.params.id, person, { new: true })
+        .then(updatedPerson => {
+            response.json(updatedPerson)
+        })
+        .catch(error => next(error));
+});
+
 
 
 // handler of requests with unknown endpoint
