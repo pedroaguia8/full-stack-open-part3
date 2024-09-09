@@ -64,19 +64,21 @@ app.get('/api/persons', (request, response) => {
 })
 
 app.get('/info', (request, response) => {
-    const date = new Date();
-
-    const infoPage = `<div>Phonebook has info for ${persons.length} people</div>
-        <br/>
-        <div>${date.toString()}</div>`;
-
-    response.send(infoPage);
-})
+    Person.find({})
+        .then(persons => {
+            const date = new Date();
+            const infoPage = `<div>Phonebook has info for ${persons.length} people</div>
+                                <br/>
+                                <div>${date.toString()}</div>`;
+            response.send(infoPage);
+        })
+        .catch(error => next(error));
+});
 
 app.get('/api/persons/:id', (request, response) => {
     Person.findById(request.params.id)
         .then(person => {
-            response.json(person)
+            response.json(person);
         })
         .catch(error => next(error));
 });

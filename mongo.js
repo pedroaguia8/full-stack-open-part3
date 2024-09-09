@@ -1,14 +1,8 @@
 const mongoose = require('mongoose')
 
-if (process.argv.length < 3) {
-    console.log('give password as argument')
-    process.exit(1)
-}
+require('dotenv').config();
 
-const password = process.argv[2];
-
-const url =
-    `mongodb+srv://pedroaguia8:${password}@full-stack-open.gkxib.mongodb.net/phonebookApp?retryWrites=true&w=majority&appName=Full-stack-open`
+const url = process.env.MONGODB_URI;
 
 mongoose.set('strictQuery', false)
 
@@ -20,6 +14,7 @@ const personSchema = new mongoose.Schema({
 })
 
 const Person = mongoose.model('Person', personSchema)
+
 
 if (process.argv.length === 3) {
     Person.find({}).then(result => {
