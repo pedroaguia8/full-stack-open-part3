@@ -10,7 +10,8 @@
     "build:ui": "@powershell Remove-Item -Recurse -Force dist && cd ../full-stack-open/part2/phonebook && npm run build && @powershell Copy-Item dist -Recurse ../../../full-stack-open-part3",
     "deploy": "fly deploy",
     "deploy:full": "npm run build:ui && npm run deploy",
-    "logs:prod": "fly logs"
+    "logs:prod": "fly logs",
+    "lint": "eslint ."
   },
   "repository": {
     "type": "git",
@@ -31,7 +32,11 @@
     "phonebook": "file:"
   },
   "devDependencies": {
+    "@eslint/js": "^9.10.0",
     "@flydotio/dockerfile": "^0.5.8",
+    "@stylistic/eslint-plugin-js": "^2.8.0",
+    "eslint": "^9.10.0",
+    "globals": "^15.9.0",
     "nodemon": "^3.1.4"
   }
 }
